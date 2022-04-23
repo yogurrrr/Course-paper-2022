@@ -28,7 +28,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         primaryStage.getIcons().add(new Image("C:\\Users\\Мария\\Desktop\\Java_HSE\\knapsnack_problem_fx\\src\\main\\resources\\images\\icon.png"));
-        this.primaryStage.setTitle("Knapsnack problem");
+        this.primaryStage.setTitle("Knapsack problem");
         showBaseWindow();
 
     }

@@ -18,7 +18,7 @@ public class generator {
 
     public static Item GenerateItem(int max_weight, int max_value){
         int i = (int)(Math.random()*(list.size()));
-        int w = (int)(Math.random()*(max_weight));
+        int w = (int)(1 + Math.random()*(max_weight));
         int v = (int)(Math.random()*(max_value));
         Item gen_item = new Item(list.get(i), w, v);
         return gen_item;

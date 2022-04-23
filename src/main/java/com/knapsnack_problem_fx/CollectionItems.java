@@ -40,11 +40,6 @@ public class CollectionItems implements ArrItems{
     public int getCapacity(){
         return capacity;
     }
-    public void filltest ()
-    {
-        itemList.add(new Item("pen", 2,4));
-        itemList.add(new Item("book", 5,7));
-    }
 
     public void clear(){
         itemList.clear();
