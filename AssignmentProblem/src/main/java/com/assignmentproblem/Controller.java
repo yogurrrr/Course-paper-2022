@@ -1,18 +1,13 @@
 package com.assignmentproblem;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
 import java.util.*;
@@ -32,23 +27,32 @@ public class Controller implements Initializable {
     }
 
     private void fillTableView(int agentsNumber, int tasksNumber) {
+        matrix.getItems().clear();
+        matrix.getColumns().clear();
         ObservableList<Agent> dataForMatrix = FXCollections.observableArrayList();
         for (int i = 0; i < agentsNumber; ++i) {
             dataForMatrix.add(new Agent(tasksNumber));
         }
+        matrix.setEditable(true);
         for (int i = 0; i < tasksNumber; ++i) {
-            TableColumn<Agent, SimpleIntegerProperty> newTaskColumn = new TableColumn<>(i + 1 + " task");
+            TableColumn<Agent, Integer> newTaskColumn = new TableColumn<>(i + 1 + " task");
+            makeColumnEditable(newTaskColumn);
             //TODO
             // придумать, как вместо 900.0 использовать ширину scene/stage
-            // и стирать старые столбцы при нажатии на кнопку
             newTaskColumn.setPrefWidth(900.0 / tasksNumber);
             newTaskColumn.setStyle("-fx-alignment: CENTER;");
             int finalI = i;
             newTaskColumn.setCellValueFactory(agentIntegerCellDataFeatures ->
-                    new ReadOnlyObjectWrapper(agentIntegerCellDataFeatures.getValue().getTaskCost().get(finalI).get()));
+                    new ReadOnlyObjectWrapper(agentIntegerCellDataFeatures.getValue().getTaskCost().get(finalI)));
             matrix.getColumns().add(newTaskColumn);
         }
         matrix.getItems().addAll(dataForMatrix);
+        Algorithm.solveProblem(matrix.getItems());
+    }
+
+    private void makeColumnEditable(TableColumn<Agent, Integer> column) {
+        column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        column.setOnEditCommit(value -> value.getTableView().getItems().get(value.getTablePosition().getRow()).setTaskCostByIndex(value.getTablePosition().getColumn(), value.getNewValue()));
     }
 
 

@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" afterDir="false" />
+    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="add a selection of parameters and filling in the table by clicking the button">
+      <change afterPath="$PROJECT_DIR$/sources.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +89,14 @@
       <option name="presentableId" value="Default" />
       <updated>1650739500145</updated>
     </task>
+    <task id="LOCAL-00001" summary="add a selection of parameters and filling in the table by clicking the button">
+      <created>1651097476965</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1651097476965</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -100,5 +109,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add a selection of parameters and filling in the table by clicking the button" />
+    <option name="LAST_COMMIT_MESSAGE" value="add a selection of parameters and filling in the table by clicking the button" />
   </component>
 </project>
