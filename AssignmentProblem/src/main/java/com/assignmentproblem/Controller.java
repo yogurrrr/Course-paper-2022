@@ -1,8 +1,6 @@
 package com.assignmentproblem;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -17,23 +15,34 @@ public class Controller implements Initializable {
     private Button confirmButton;
 
     @FXML
-    private TableView<Agent> matrix;
+    private Button generateButton;
+
+    @FXML
+    private Button startAlgorithmButton;
+
+    @FXML
+    private Label answerLabel;
+
+    @FXML
+    private TableView<Agent> table;
 
     @FXML
     private void getAgentsAndTasksNumbers() {
         int agentsNumber = agentsSpinner.getValue();
         int tasksNumber = tasksSpinner.getValue();
+        new DataMatrix(agentsNumber, tasksNumber);
         fillTableView(agentsNumber, tasksNumber);
     }
 
+    //@SuppressWarnings("unchecked")
     private void fillTableView(int agentsNumber, int tasksNumber) {
-        matrix.getItems().clear();
-        matrix.getColumns().clear();
-        ObservableList<Agent> dataForMatrix = FXCollections.observableArrayList();
-        for (int i = 0; i < agentsNumber; ++i) {
-            dataForMatrix.add(new Agent(tasksNumber));
-        }
-        matrix.setEditable(true);
+        table.getItems().clear();
+        table.getColumns().clear();
+//        ArrayList<Agent> dataForMatrix = new ArrayList<>();
+//        for (int i = 0; i < agentsNumber; ++i) {
+//            dataForMatrix.add(new Agent(tasksNumber));
+//        }
+        table.setEditable(true);
         for (int i = 0; i < tasksNumber; ++i) {
             TableColumn<Agent, Integer> newTaskColumn = new TableColumn<>(i + 1 + " task");
             makeColumnEditable(newTaskColumn);
@@ -44,15 +53,36 @@ public class Controller implements Initializable {
             int finalI = i;
             newTaskColumn.setCellValueFactory(agentIntegerCellDataFeatures ->
                     new ReadOnlyObjectWrapper(agentIntegerCellDataFeatures.getValue().getTaskCost().get(finalI)));
-            matrix.getColumns().add(newTaskColumn);
+            table.getColumns().add(newTaskColumn);
         }
-        matrix.getItems().addAll(dataForMatrix);
-        Algorithm.solveProblem(matrix.getItems());
+        table.getItems().addAll(DataMatrix.getMatrix());
+        // Algorithm.solveProblem(matrix.getItems());
+        // answerLabel.setText(Integer.toString(Algorithm.solveProblem(matrix.getItems())));
     }
 
     private void makeColumnEditable(TableColumn<Agent, Integer> column) {
         column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         column.setOnEditCommit(value -> value.getTableView().getItems().get(value.getTablePosition().getRow()).setTaskCostByIndex(value.getTablePosition().getColumn(), value.getNewValue()));
+    }
+
+    @FXML
+    private void startAlgorithm() {
+        answerLabel.setText(Integer.toString(Algorithm.solveProblem(DataMatrix.getMatrix())));
+    }
+
+    @FXML
+    private void generateData() {
+        int agentsNumber = agentsSpinner.getValue();
+        int tasksNumber = tasksSpinner.getValue();
+        DataMatrix.clear();
+        DataMatrix.setVoidMatrix(agentsNumber, tasksNumber);
+        // если данные из спиннеров не совпадают с реальными размерами таблицы, создаём корректную таблицу
+        if (agentsNumber != table.getItems().size() || tasksNumber != table.getItems().get(0).getTaskCost().size()) {
+            fillTableView(agentsNumber, tasksNumber);
+        }
+        InputDataGenerator.generate(agentsNumber, tasksNumber);
+        table.getItems().clear();
+        table.getItems().addAll(DataMatrix.getMatrix());
     }
 
 

@@ -1,32 +1,26 @@
 package com.assignmentproblem;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 public class Agent {
 
-    private ObservableList<Integer> taskCost;
+    private ArrayList<Integer> taskCost;
 
-    public Agent(ObservableList<Integer> tasks) {
+    public Agent(ArrayList<Integer> tasks) {
         this.taskCost = tasks;
     }
 
     public Agent(int tasksNumber) {
-        List<Integer> zeros = new ArrayList<>();
-        for (int i = 0; i < tasksNumber; ++i) {
-            zeros.add(0);
-        }
-        this.taskCost = FXCollections.observableArrayList(zeros);
+        this.taskCost = new ArrayList<>(Collections.nCopies(tasksNumber, 0));
     }
 
-    public ObservableList<Integer> getTaskCost() {
+    public ArrayList<Integer> getTaskCost() {
         return taskCost;
     }
 
-    public void setTaskCost(ObservableList<Integer> taskCost) {
+    public void setTaskCost(ArrayList<Integer> taskCost) {
         this.taskCost = taskCost;
     }
 

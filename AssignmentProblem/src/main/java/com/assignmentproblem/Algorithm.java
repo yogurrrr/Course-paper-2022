@@ -1,53 +1,36 @@
 package com.assignmentproblem;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Algorithm {
-    public static ObservableList<ObservableList<Integer>> solveProblem(ObservableList<Agent> agents) {
+    public static /*ObservableList<ObservableList<Integer>>*/ int solveProblem(ArrayList<Agent> agents) {
         int agentsNumber = agents.size();
         int tasksNumber = agents.get(0).getTaskCost().size();
-        int lowerDimension = agentsNumber, biggerDimension = tasksNumber;
-        if (agentsNumber >= tasksNumber) {
-            lowerDimension = tasksNumber;
-            biggerDimension = agentsNumber;
-        }
-        ObservableList<ObservableList<Integer>> matrix = FXCollections.observableArrayList();
-        for (int i = 0; i < lowerDimension; ++i) {
-            matrix.set(i, agents.get(i).getTaskCost());
-        }
         // массив паросочетания, индекс -- столбец, значение -- строка
-        List<Integer> matching = new ArrayList<>(biggerDimension + 1);
+        ArrayList<Integer> matching = new ArrayList<>(Collections.nCopies(tasksNumber + 1, -1));
         // потенциалы строк и столбцов
-        List<Integer> rowPotential = new ArrayList<>(lowerDimension);
-        List<Integer> columnPotential = new ArrayList<>(biggerDimension);
-        List<Integer> way = new ArrayList<>(biggerDimension);
+        ArrayList<Integer> rowPotential = new ArrayList<>(Collections.nCopies(agentsNumber, 0));
+        ArrayList<Integer> columnPotential = new ArrayList<>(Collections.nCopies(tasksNumber + 1, 0));
+        // список для восстановления пути, индекс -- столбец, значение -- предшествующий столбец
+        ArrayList<Integer> way = new ArrayList<>(Collections.nCopies(tasksNumber, -1));
 
-        Collections.fill(rowPotential, 0);
-        Collections.fill(columnPotential, 0);
-        Collections.fill(matching, -1);
-        Collections.fill(way, -1);
-
-        for (int currentRow = 0; currentRow < lowerDimension; ++currentRow) {
+        for (int currentRow = 0; currentRow < agentsNumber; ++currentRow) {
             // вспомогательные минимумы
-            List<Integer> columnMinimum = new ArrayList<>(biggerDimension);
-            Collections.fill(columnMinimum, Integer.MAX_VALUE);
-            List<Boolean> visitedColumn = new ArrayList<>(biggerDimension);
-            Collections.fill(visitedColumn, false);
-            int currentColumn = biggerDimension; // фиктивный столбец (из него начинает работу алгоритм)
+            ArrayList<Integer> columnMinimum = new ArrayList<>(Collections.nCopies(tasksNumber, Integer.MAX_VALUE));
+            ArrayList<Boolean> visitedColumn = new ArrayList<>(Collections.nCopies(tasksNumber + 1, false));
+            matching.set(tasksNumber, currentRow);
+            int currentColumn = tasksNumber; // фиктивный столбец (из него начинает работу алгоритм)
             do {
                 visitedColumn.set(currentColumn, true);
                 int foundRow = matching.get(currentColumn);
                 int delta = Integer.MAX_VALUE;
                 int newColumn = -1;
-                for (int column = 0; column < biggerDimension; ++column) {
-                    // пытаемся найти лучшее (минимальное) новое ребро из посещённых строк в непосещённые столбцы
+                for (int column = 0; column < tasksNumber; ++column) {
+                    // пытаемся найти лучшее (минимальное) новое ребро из посещённой строки в непосещённые столбцы
                     if (!visitedColumn.get(column)) {
-                        int newValue = matrix.get(foundRow).get(column) - rowPotential.get(column) - columnPotential.get(column);
+                        int newValue = DataMatrix.getMatrix().get(foundRow).getTaskCost().get(column) - rowPotential.get(foundRow) - columnPotential.get(column);
                         if (newValue < columnMinimum.get(column)) {
                             columnMinimum.set(column, newValue);
                             way.set(column, currentColumn);
@@ -59,12 +42,11 @@ public class Algorithm {
                     }
                 }
                 // пересчитываем потенциал
-                for (int column = 0; column <= biggerDimension; ++column) {
+                for (int column = 0; column <= tasksNumber; ++column) {
                     if (visitedColumn.get(column)) {
                         columnPotential.set(column, columnPotential.get(column) - delta);
                         rowPotential.set(matching.get(column), rowPotential.get(matching.get(column)) - delta);
-                    }
-                    else {
+                    } else {
                         columnMinimum.set(column, columnMinimum.get(column) - delta);
                     }
                 }
@@ -75,11 +57,11 @@ public class Algorithm {
                 int previousColumn = way.get(currentColumn);
                 matching.set(currentColumn, matching.get(previousColumn));
                 currentColumn = previousColumn;
-            } while (currentColumn != biggerDimension);
+            } while (currentColumn != tasksNumber);
         }
         //TODO
         // взаимодействие с контроллером
         // поиск багов
-        return matrix;
+        return -columnPotential.get(tasksNumber);
     }
 }

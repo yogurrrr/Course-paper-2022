@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="add a selection of parameters and filling in the table by clicking the button">
-      <change afterPath="$PROJECT_DIR$/sources.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" afterDir="false" />
+    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="add &quot;Algorithm&quot; class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/DataMatrix.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/InputDataGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651097476965</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add &quot;Algorithm&quot; class">
+      <created>1652218289447</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1652218289447</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -112,6 +119,32 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add a selection of parameters and filling in the table by clicking the button" />
-    <option name="LAST_COMMIT_MESSAGE" value="add a selection of parameters and filling in the table by clicking the button" />
+    <MESSAGE value="add &quot;Algorithm&quot; class" />
+    <option name="LAST_COMMIT_MESSAGE" value="add &quot;Algorithm&quot; class" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java</url>
+          <line>8</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java</url>
+          <line>74</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
