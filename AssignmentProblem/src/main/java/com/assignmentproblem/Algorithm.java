@@ -30,26 +30,32 @@ public class Algorithm {
                 for (int column = 0; column < tasksNumber; ++column) {
                     // пытаемся найти лучшее (минимальное) новое ребро из посещённой строки в непосещённые столбцы
                     if (!visitedColumn.get(column)) {
-                        int newValue = DataMatrix.getMatrix().get(foundRow).getTaskCost().get(column) - rowPotential.get(foundRow) - columnPotential.get(column);
-                        if (newValue < columnMinimum.get(column)) {
-                            columnMinimum.set(column, newValue);
+                        int newColumnMinimumValue = DataMatrix.getMatrix().get(foundRow).getTaskCost().get(column) -
+                                rowPotential.get(foundRow) - columnPotential.get(column);
+                        if (newColumnMinimumValue < columnMinimum.get(column)) {
+                            columnMinimum.set(column, newColumnMinimumValue);
                             way.set(column, currentColumn);
                         }
+                        // delta -- наименьшее знвчение изменения потенциала, при котором появится новое жёсткое ребро
                         if (columnMinimum.get(column) < delta) {
                             delta = columnMinimum.get(column);
                             newColumn = column;
                         }
                     }
                 }
-                // пересчитываем потенциал
+                // пересчитываем потенциал и вспомогательные минимумы
                 for (int column = 0; column <= tasksNumber; ++column) {
+                    // если колонка была посещена обходом
                     if (visitedColumn.get(column)) {
+                        // пересчитываем потенциал для этой колонки и соответсвующей строки в паросочетании
                         columnPotential.set(column, columnPotential.get(column) - delta);
-                        rowPotential.set(matching.get(column), rowPotential.get(matching.get(column)) - delta);
+                        rowPotential.set(matching.get(column), rowPotential.get(matching.get(column)) + delta);
                     } else {
+                        // иначе уменьшаем вспомогательный минимум на delta
                         columnMinimum.set(column, columnMinimum.get(column) - delta);
                     }
                 }
+                // новая колонка -- та, в которой вспомогательный минимум равен delta
                 currentColumn = newColumn;
             } while (matching.get(currentColumn) != -1);
             // чередуем рёбра вдоль найденной увеличивающей цепи
@@ -59,9 +65,6 @@ public class Algorithm {
                 currentColumn = previousColumn;
             } while (currentColumn != tasksNumber);
         }
-        //TODO
-        // взаимодействие с контроллером
-        // поиск багов
         return -columnPotential.get(tasksNumber);
     }
 }

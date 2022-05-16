@@ -6,8 +6,8 @@ import java.util.Collections;
 public class DataMatrix {
     private static ArrayList<Agent> matrix;
 
-    DataMatrix(int agentsNumber, int tasksNumber) {
-        matrix = new ArrayList<>(Collections.nCopies(agentsNumber, new Agent(tasksNumber)));
+    public static void makeNewMatrix() {
+        matrix = new ArrayList<>();
     }
 
     public static ArrayList<Agent> getMatrix() {

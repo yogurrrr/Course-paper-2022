@@ -28,9 +28,12 @@ public class Controller implements Initializable {
 
     @FXML
     private void getAgentsAndTasksNumbers() {
+        //TODO
+        // сделать проверку на то, что agentsNumber <= tasksNumber
         int agentsNumber = agentsSpinner.getValue();
         int tasksNumber = tasksSpinner.getValue();
-        new DataMatrix(agentsNumber, tasksNumber);
+        DataMatrix.makeNewMatrix();
+        DataMatrix.setVoidMatrix(agentsNumber, tasksNumber);
         fillTableView(agentsNumber, tasksNumber);
     }
 
@@ -38,10 +41,6 @@ public class Controller implements Initializable {
     private void fillTableView(int agentsNumber, int tasksNumber) {
         table.getItems().clear();
         table.getColumns().clear();
-//        ArrayList<Agent> dataForMatrix = new ArrayList<>();
-//        for (int i = 0; i < agentsNumber; ++i) {
-//            dataForMatrix.add(new Agent(tasksNumber));
-//        }
         table.setEditable(true);
         for (int i = 0; i < tasksNumber; ++i) {
             TableColumn<Agent, Integer> newTaskColumn = new TableColumn<>(i + 1 + " task");
@@ -56,8 +55,6 @@ public class Controller implements Initializable {
             table.getColumns().add(newTaskColumn);
         }
         table.getItems().addAll(DataMatrix.getMatrix());
-        // Algorithm.solveProblem(matrix.getItems());
-        // answerLabel.setText(Integer.toString(Algorithm.solveProblem(matrix.getItems())));
     }
 
     private void makeColumnEditable(TableColumn<Agent, Integer> column) {
@@ -94,9 +91,11 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        SpinnerValueFactory<Integer> agentsSpinnerFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 4);
+        SpinnerValueFactory<Integer> agentsSpinnerFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 2);
         this.agentsSpinner.setValueFactory(agentsSpinnerFactory);
-        SpinnerValueFactory<Integer> tasksSpinnerFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 4);
+        SpinnerValueFactory<Integer> tasksSpinnerFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 2);
         this.tasksSpinner.setValueFactory(tasksSpinnerFactory);
     }
 
