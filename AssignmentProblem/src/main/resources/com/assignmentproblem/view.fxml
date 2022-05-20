@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -11,37 +12,37 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.assignmentproblem.Controller">
    <AnchorPane prefHeight="159.0" prefWidth="900.0">
-      <Separator layoutX="440.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="106.0" prefWidth="19.0"/>
+      <Separator layoutX="440.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="106.0" prefWidth="19.0" />
       <Label layoutX="141.0" layoutY="14.0" text="Enter number of agents">
          <font>
-            <Font name="System Bold Italic" size="14.0"/>
+            <Font name="System Bold Italic" size="14.0" />
          </font>
          <opaqueInsets>
-            <Insets/>
+            <Insets />
          </opaqueInsets>
       </Label>
       <Label layoutX="610.0" layoutY="14.0" text="Enter number of tasks">
          <font>
-            <Font name="System Bold Italic" size="14.0"/>
+            <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <Separator layoutY="93.0" prefHeight="26.0" prefWidth="900.0"/>
-      <Button fx:id="confirmButton" layoutX="420.0" layoutY="119.0" mnemonicParsing="false"
-              onAction="#getAgentsAndTasksNumbers" text="Confirm"/>
-      <Spinner fx:id="agentsSpinner" layoutX="140.0" layoutY="54.0" prefHeight="26.0" prefWidth="154.0"/>
-      <Spinner fx:id="tasksSpinner" layoutX="610.0" layoutY="54.0" prefHeight="26.0" prefWidth="143.0"/>
+      <Separator layoutY="93.0" prefHeight="26.0" prefWidth="900.0" />
+      <Button fx:id="confirmButton" layoutX="420.0" layoutY="119.0" mnemonicParsing="false" onAction="#getAgentsAndTasksNumbers" text="Confirm" />
+      <Spinner fx:id="agentsSpinner" layoutX="140.0" layoutY="54.0" prefHeight="26.0" prefWidth="154.0" />
+      <Spinner fx:id="tasksSpinner" layoutX="610.0" layoutY="54.0" prefHeight="26.0" prefWidth="143.0" />
    </AnchorPane>
    <AnchorPane layoutY="159.0" prefHeight="539.0" prefWidth="900.0">
-      <Button fx:id="startAlgorithmButton" layoutX="651.0" layoutY="231.0" mnemonicParsing="false"
-              onAction="#startAlgorithm" text="Start algorithm"/>
-      <TableView fx:id="table" prefHeight="200.0" prefWidth="900.0"/>
-      <Button fx:id="generateButton" layoutX="178.0" layoutY="231.0" mnemonicParsing="false" onAction="#generateData"
-              text="Generate"/>
-      <Label layoutX="399.0" layoutY="319.0" text="Best matching">
+      <Button fx:id="startAlgorithmButton" disable="true" layoutX="651.0" layoutY="231.0" mnemonicParsing="false" onAction="#startAlgorithm" text="Start algorithm" />
+      <TableView fx:id="inputTable" disable="true" prefHeight="200.0" prefWidth="900.0" />
+      <Button fx:id="generateButton" disable="true" layoutX="178.0" layoutY="231.0" mnemonicParsing="false" onAction="#generateData" text="Generate" />
+      <Label fx:id="outputLabel" alignment="TOP_CENTER" layoutX="62.0" layoutY="288.0" prefHeight="246.0" prefWidth="774.0" visible="false">
          <font>
-            <Font name="System Bold Italic" size="14.0"/>
+            <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="answerLabel" layoutX="402.0" layoutY="376.0" text="kjsvbjsndbvnsdb"/>
+      <Separator layoutY="270.0" prefHeight="18.0" prefWidth="900.0" />
+      <rotationAxis>
+         <Point3D x="-1.0" z="1.0" />
+      </rotationAxis>
    </AnchorPane>
 </AnchorPane>

@@ -3,9 +3,10 @@ package com.assignmentproblem;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicReferenceArray;
 
 public class Algorithm {
-    public static /*ObservableList<ObservableList<Integer>>*/ int solveProblem(ArrayList<Agent> agents) {
+    public static ArrayList<Integer> solveProblem(ArrayList<Agent> agents) {
         int agentsNumber = agents.size();
         int tasksNumber = agents.get(0).getTaskCost().size();
         // массив паросочетания, индекс -- столбец, значение -- строка
@@ -65,6 +66,8 @@ public class Algorithm {
                 currentColumn = previousColumn;
             } while (currentColumn != tasksNumber);
         }
-        return -columnPotential.get(tasksNumber);
+        ArrayList<Integer> output = new ArrayList<>(matching);
+        output.add(-columnPotential.get(tasksNumber));
+        return output;
     }
 }

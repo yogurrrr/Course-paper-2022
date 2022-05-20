@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="add &quot;Data&quot; and &quot;InputDataGenerator&quot; classes, bug fixes in &quot;Algorithm&quot;" />
+    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="add &quot;Data&quot; and &quot;InputDataGenerator&quot; classes, bug fixes in &quot;Algorithm&quot;">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,17 +136,17 @@
         </breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java</url>
-          <line>8</line>
+          <line>9</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java</url>
-          <line>64</line>
+          <line>65</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java</url>
-          <line>74</line>
+          <line>115</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>

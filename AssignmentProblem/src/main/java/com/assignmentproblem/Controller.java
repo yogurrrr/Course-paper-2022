@@ -15,46 +15,66 @@ public class Controller implements Initializable {
     private Button confirmButton;
 
     @FXML
+    private Label bestMatchingLabel;
+
+    @FXML
     private Button generateButton;
 
     @FXML
     private Button startAlgorithmButton;
 
     @FXML
-    private Label answerLabel;
+    private TableView<Agent> inputTable;
 
     @FXML
-    private TableView<Agent> table;
+    private Label outputLabel;
 
     @FXML
     private void getAgentsAndTasksNumbers() {
-        //TODO
-        // сделать проверку на то, что agentsNumber <= tasksNumber
         int agentsNumber = agentsSpinner.getValue();
         int tasksNumber = tasksSpinner.getValue();
-        DataMatrix.makeNewMatrix();
-        DataMatrix.setVoidMatrix(agentsNumber, tasksNumber);
-        fillTableView(agentsNumber, tasksNumber);
+        if (agentsNumber <= tasksNumber) {
+            generateButton.setDisable(false);
+            startAlgorithmButton.setDisable(false);
+            agentsSpinner.setDisable(true);
+            tasksSpinner.setDisable(true);
+            inputTable.setDisable(false);
+            outputLabel.setVisible(false);
+//            answerLabel.setText("");
+//            answerLabel.setVisible(false);
+//            outputTable.getColumns().clear();
+//            outputTable.getItems().clear();
+//            bestMatchingLabel.setVisible(false);
+//            outputTable.setVisible(false);
+            DataMatrix.makeNewMatrix();
+            DataMatrix.setVoidMatrix(agentsNumber, tasksNumber);
+            fillTableView(agentsNumber, tasksNumber);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Warning about input data");
+            alert.setHeaderText(null);
+            alert.setContentText("Number of agents must be less or equal to number of tasks.");
+            alert.showAndWait();
+        }
     }
 
     //@SuppressWarnings("unchecked")
     private void fillTableView(int agentsNumber, int tasksNumber) {
-        table.getItems().clear();
-        table.getColumns().clear();
-        table.setEditable(true);
+        inputTable.getItems().clear();
+        inputTable.getColumns().clear();
+        inputTable.setEditable(true);
         for (int i = 0; i < tasksNumber; ++i) {
             TableColumn<Agent, Integer> newTaskColumn = new TableColumn<>(i + 1 + " task");
             makeColumnEditable(newTaskColumn);
-            //TODO
-            // придумать, как вместо 900.0 использовать ширину scene/stage
-            newTaskColumn.setPrefWidth(900.0 / tasksNumber);
+            newTaskColumn.setPrefWidth(inputTable.getPrefWidth() / tasksNumber);
             newTaskColumn.setStyle("-fx-alignment: CENTER;");
             int finalI = i;
             newTaskColumn.setCellValueFactory(agentIntegerCellDataFeatures ->
                     new ReadOnlyObjectWrapper(agentIntegerCellDataFeatures.getValue().getTaskCost().get(finalI)));
-            table.getColumns().add(newTaskColumn);
+            inputTable.getColumns().add(newTaskColumn);
         }
-        table.getItems().addAll(DataMatrix.getMatrix());
+        inputTable.getItems().addAll(DataMatrix.getMatrix());
     }
 
     private void makeColumnEditable(TableColumn<Agent, Integer> column) {
@@ -64,7 +84,28 @@ public class Controller implements Initializable {
 
     @FXML
     private void startAlgorithm() {
-        answerLabel.setText(Integer.toString(Algorithm.solveProblem(DataMatrix.getMatrix())));
+        agentsSpinner.setDisable(false);
+        tasksSpinner.setDisable(false);
+        generateButton.setDisable(true);
+        startAlgorithmButton.setDisable(true);
+        inputTable.setEditable(false);
+        outputLabel.setVisible(true);
+//        outputTable.setItems(inputTable.getItems());
+//        outputTable.getColumns().addAll(inputTable.getColumns());
+//        answerLabel.setVisible(true);
+//        bestMatchingLabel.setVisible(true);
+//        outputTable.setVisible(true);
+//        answerLabel.setText(Integer.toString(Algorithm.solveProblem(DataMatrix.getMatrix())));
+        ArrayList<Integer> algorithmOutput = Algorithm.solveProblem(DataMatrix.getMatrix());
+        outputLabel.setText("Best matching: " + algorithmOutput.get(algorithmOutput.size() - 1) + "\n\n");
+//        answerLabel.setText(Integer.toString(algorithmOutput.get(algorithmOutput.size() - 1)));
+        algorithmOutput.remove(algorithmOutput.size() - 1);
+        for (int matchedColumn = 0; matchedColumn < algorithmOutput.size() - 1; ++matchedColumn) {
+            int matchedRow = algorithmOutput.get(matchedColumn);
+            if (matchedRow != -1) {
+                outputLabel.setText(outputLabel.getText() + (matchedRow + 1) + " agent --> " + (matchedColumn + 1) + " task\n");
+            }
+        }
     }
 
     @FXML
@@ -74,12 +115,12 @@ public class Controller implements Initializable {
         DataMatrix.clear();
         DataMatrix.setVoidMatrix(agentsNumber, tasksNumber);
         // если данные из спиннеров не совпадают с реальными размерами таблицы, создаём корректную таблицу
-        if (agentsNumber != table.getItems().size() || tasksNumber != table.getItems().get(0).getTaskCost().size()) {
+        if (agentsNumber != inputTable.getItems().size() || tasksNumber != inputTable.getItems().get(0).getTaskCost().size()) {
             fillTableView(agentsNumber, tasksNumber);
         }
         InputDataGenerator.generate(agentsNumber, tasksNumber);
-        table.getItems().clear();
-        table.getItems().addAll(DataMatrix.getMatrix());
+        inputTable.getItems().clear();
+        inputTable.getItems().addAll(DataMatrix.getMatrix());
     }
 
 
