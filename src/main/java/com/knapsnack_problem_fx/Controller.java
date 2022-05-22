@@ -7,18 +7,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
-import javafx.stage.FileChooser;
 import javafx.util.Duration;
-
-import java.io.File;
-import java.util.Iterator;
 
 public class Controller {
 
@@ -103,48 +98,44 @@ public class Controller {
 
     //Ccылка на главный класс-контроллер
     private MainApp mainApp;
-    private CollectionItems Items = new CollectionItems();
-    private CollectionItems putItems = new CollectionItems();
+    private ObservableList<Item> Items = FXCollections.observableArrayList(); //коллекция всех предметов, претендующих на попадание в рюкзак
+    private ObservableList<Item> putItems = FXCollections.observableArrayList(); //коллекция всех предметов, попавших в рюкзак, в результате работы алгоритма
+    int capacity = 0;
     private int indx = 0;
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        //itemsView_in.setItems(mainApp.getItems());
     }
 
+    // управление таблицами на форме
     @FXML
     private void initialize() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Item, String>("name"));
-        /*weightColumn.setCellValueFactory((cellData) ->
-                cellData.getValue().weightProperty().asObject());
-        valueColumn.setCellValueFactory((cellData) ->
-                cellData.getValue().valueProperty().asObject());*/
         weightColumn.setCellValueFactory(new PropertyValueFactory<Item, Integer>("weight"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<Item, Integer>("value"));
-        //Items.filltest();
-        itemsView_all.setItems(Items.getItems());
+        itemsView_all.setItems(Items);
         nameColumn2.setCellValueFactory(new PropertyValueFactory<Item, String>("name"));
         weightColumn2.setCellValueFactory(new PropertyValueFactory<Item, Integer>("weight"));
         valueColumn2.setCellValueFactory(new PropertyValueFactory<Item, Integer>("value"));
-        itemsView_in.setItems(putItems.getItems());
+        itemsView_in.setItems(putItems);
 
     }
-
+    // действия при нажатии на кнопку добавления предмета
     @FXML
     private void AddItem() {
-        if (isInputValidForAdd()) {
+        if (isInputValidForAdd()) //проверка на валидность ввода
+        {
             String name = Name_Field.getText();
             int weight = Integer.parseInt(Weight_Field.getText());
             int value = Integer.parseInt(Value_Field.getText());
-            Items.Add(new Item(name, weight, value));
+            Items.add(new Item(name, weight, value));
         }
     }
     @FXML
     private  void SetCapacity()
     {
         if (isInputValidForFillInventory()){
-        int capacity = Integer.parseInt(Capacity_Field.getText());
-        Items.Set(capacity);
+        capacity = Integer.parseInt(Capacity_Field.getText());
         textCapacity.setText(Integer.toString(capacity));
         }
     }
@@ -156,7 +147,7 @@ public class Controller {
             int m_weight = Integer.parseInt(max_weight.getText());
             int m_value = Integer.parseInt(max_value.getText());
             for (int i=0; i<count; i++){
-            Items.Add(generator.GenerateItem(m_weight, m_value));}
+            Items.add(generator.GenerateItem(m_weight, m_value));}
         }
     }
 
@@ -167,7 +158,7 @@ public class Controller {
     }
     @FXML
     private  void Fill(){
-        if (Items.getCapacity()==0){
+        if (capacity==0){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Error");
@@ -175,9 +166,9 @@ public class Controller {
             alert.showAndWait();
         }
         else{
-        putItems.setItemList(problem_solver.getBestItems(Items));
-        itemsView_in.setItems(putItems.getItems());
-        if (putItems.getItems().size()>=1){
+        putItems = problem_solver.getBestItems(Items, capacity);
+        itemsView_in.setItems(putItems);
+        if (putItems.size()>=1){
             indx = 0;
             circle_item2.setLayoutX(572);
             circle_item2.setLayoutY(105);
@@ -188,13 +179,13 @@ public class Controller {
             item_name1.setLayoutX(175);
             item_name1.setLayoutY(96);
             Button_fill.setDisable(true);
-            animation(putItems.getItems().size(), putItems.getItems());}}
+            animation(putItems.size(), putItems);}}
     }
     @FXML
     private void download (){
         MainApp choose = new MainApp();
-        Items.setItemList(choose.show_chooser());
-        itemsView_all.setItems(Items.getItems());
+        Items = choose.show_chooser();
+        itemsView_all.setItems(Items);
         //itemsView_in.setItems(putItems.getItems());
     }
     private void animation(Integer k, ObservableList<Item> putItems){
@@ -218,7 +209,6 @@ public class Controller {
         KeyValue xValueL = new KeyValue(item_name1.translateXProperty(), 173);
         KeyValue yValueL = new KeyValue(item_name1.translateYProperty(), 80);
 
-        //int finalI = i;
         KeyFrame keyFrame = new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
             boolean b = true;
             String that;
@@ -259,13 +249,8 @@ public class Controller {
         KeyValue yValue2 = new KeyValue(circle_item2.translateYProperty(), 80);
         KeyValue xValueL2 = new KeyValue(item_name2.translateXProperty(), -173);
         KeyValue yValueL2 = new KeyValue(item_name2.translateYProperty(), 80);
-        //KeyValue xV = new KeyValue(circle_item1.(), false);
-        //KeyValue yV = new KeyValue(circle_item1.centerYProperty(), 80);
-
         KeyFrame keyFrame2 = new KeyFrame(Duration.millis(2000), new EventHandler<ActionEvent>() {
             boolean b2 = true;
-//            Iterator <Item> Iter2 = putItems.iterator();
-//            boolean z = Iter2.hasNext();
             String that2;
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -275,8 +260,6 @@ public class Controller {
                     Timeline timeline_in = new Timeline();
                     timeline_in.getKeyFrames().addAll(in2, in2L);
                     timeline_in.play();
-                    //circle_item2.setTranslateX(circle_item2.getTranslateX() - 175);
-                    //circle_item2.setTranslateY(circle_item2.getTranslateY() + 80);
                     b2 = !b2;
 
                 }
@@ -302,15 +285,8 @@ public class Controller {
         if (k%2==0){
         timeline.setCycleCount(k);}
         else {timeline.setCycleCount(k+1);}
-        //timeline.setAutoReverse(true);
         timeline.getKeyFrames().addAll(keyFrame, keyFrame2);
         timeline.play();
-        //circle_item1.setVisible(false);
-//        visual_panel.getChildren().add(circle_item1);
-//        circle_item1.setLayoutX(circle_item1.getLayoutX() + 175);
-//        circle_item1.setLayoutY(circle_item1.getLayoutY() + 80);
-//        circle_item1.setTranslateX(circle_item1.getTranslateX() + 175);
-//        circle_item1.setTranslateY(circle_item1.getTranslateY() + 80);
 
     }
 
