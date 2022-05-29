@@ -191,7 +191,7 @@ public class Controller {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Error");
-            alert.setHeaderText("the number of items is too large");
+            alert.setHeaderText("The number of items is too large");
             alert.setContentText(errMessage.toString());
             alert.showAndWait();
         }
@@ -315,6 +315,9 @@ public class Controller {
         else {
             try {
                 Integer.parseInt(Capacity_Field.getText());
+                if (Integer.parseInt(Capacity_Field.getText())<=0){
+                    errMessage.append("Backpack capacity must be greater than zero\n");
+                }
             }
             catch (NumberFormatException e) {
                 errMessage.append("Backpack capacity must be an integer\n");
@@ -345,6 +348,9 @@ public class Controller {
         else {
             try {
                 Integer.parseInt(Weight_Field.getText());
+                if (Integer.parseInt(Weight_Field.getText())<=0){
+                    errMessage.append("Item weight must be greater than zero\n");
+                }
             }
             catch (NumberFormatException e) {
                 errMessage.append("Item weight must be an integer\n");
@@ -356,6 +362,9 @@ public class Controller {
         else {
             try {
                 Integer.parseInt(Value_Field.getText());
+                if (Integer.parseInt(Value_Field.getText())<0){
+                    errMessage.append("Item value must be greater than or equal to zero\n");
+                }
             }
             catch (NumberFormatException e) {
                 errMessage.append("Item value must be an integer\n");
@@ -383,6 +392,9 @@ public class Controller {
         else {
             try {
                 Integer.parseInt(quantity.getText());
+                if (Integer.parseInt(quantity.getText())<=0){
+                    errMessage.append("Quantity must be greater than zero\n");
+                }
             }
             catch (NumberFormatException e) {
                 errMessage.append("Quantity must be an integer\n");
@@ -394,6 +406,9 @@ public class Controller {
         else {
             try {
                 Integer.parseInt(max_weight.getText());
+                if (Integer.parseInt(max_weight.getText())<=0){
+                    errMessage.append("Item max weight must be greater than zero\n");
+                }
             }
             catch (NumberFormatException e) {
                 errMessage.append("Item max weight must be an integer\n");
@@ -405,6 +420,9 @@ public class Controller {
         else {
             try {
                 Integer.parseInt(max_value.getText());
+                if (Integer.parseInt(max_value.getText())<0){
+                    errMessage.append("Item max value must be greater than or equal to zero\n");
+                }
             }
             catch (NumberFormatException e) {
                 errMessage.append("Item max value must be an integer\n");
