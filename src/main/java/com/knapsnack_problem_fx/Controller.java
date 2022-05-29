@@ -158,6 +158,7 @@ public class Controller {
     }
     @FXML
     private  void Fill(){
+        StringBuilder errMessage = new StringBuilder();
         if (capacity==0){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
@@ -165,21 +166,36 @@ public class Controller {
             alert.setHeaderText("Enter backpack capacity!");
             alert.showAndWait();
         }
-        else{
-        putItems = problem_solver.getBestItems(Items, capacity);
-        itemsView_in.setItems(putItems);
-        if (putItems.size()>=1){
-            indx = 0;
-            circle_item2.setLayoutX(572);
-            circle_item2.setLayoutY(105);
-            item_name2.setLayoutX(545);
-            item_name2.setLayoutY(96);
-            circle_item1.setLayoutX(200);
-            circle_item1.setLayoutY(105);
-            item_name1.setLayoutX(175);
-            item_name1.setLayoutY(96);
-            Button_fill.setDisable(true);
-            animation(putItems.size(), putItems);}}
+        else {
+            try {
+                putItems = problem_solver.getBestItems(Items, capacity);
+                itemsView_in.setItems(putItems);
+                if (putItems.size() >= 1) {
+                    indx = 0;
+                    circle_item2.setLayoutX(572);
+                    circle_item2.setLayoutY(105);
+                    item_name2.setLayoutX(545);
+                    item_name2.setLayoutY(96);
+                    circle_item1.setLayoutX(200);
+                    circle_item1.setLayoutY(105);
+                    item_name1.setLayoutX(175);
+                    item_name1.setLayoutY(96);
+                    Button_fill.setDisable(true);
+                    animation(putItems.size(), putItems);
+                }
+            }
+            catch (java.lang.StackOverflowError e) {
+                errMessage.append("try clearing the table and entering fewer items\n");
+            }
+        if (!errMessage.toString().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Error");
+            alert.setHeaderText("the number of items is too large");
+            alert.setContentText(errMessage.toString());
+            alert.showAndWait();
+        }
+        }
     }
     @FXML
     private void download (){
