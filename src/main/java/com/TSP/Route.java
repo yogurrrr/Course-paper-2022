@@ -1,28 +1,28 @@
 package com.TSP;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Route {
 
-    private ArrayList<City> cities = new ArrayList<City>();
+    public int[] cities;
+    public int citiesCount;
+    public int routeLength;
 
-    public ArrayList<City> getCities() {
-        return cities;
+    Route(int maxCitiesCount) {
+        cities = new int[maxCitiesCount];
+        citiesCount = 0;
+        routeLength = 0;
     }
 
-    public Route(ArrayList<City> cities) { this.cities.addAll(cities); }
-
-    public int calculateTotalDistance() {
-        int citiesSize = this.getCities().size();
-        return (int)(this.getCities().stream().mapToDouble(x -> {
-            int cityIndex = this.getCities().indexOf(x);
-            double returnValue = 0;
-            if (cityIndex < citiesSize-1)
-                returnValue = x.MeasureDistance(this.getCities().get(cityIndex+1));
-            return returnValue;
-        }).sum() + this.getCities().get(citiesSize-1).MeasureDistance(this.getCities().get(0)));
+    public void addCity(int city, int distToPrevCity) {
+        cities[citiesCount++] = city;
+        routeLength += distToPrevCity;
     }
 
-    public String toString() { return Arrays.toString(cities.toArray()); }
+    public void printRoute() {
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+        System.out.print("Route: ");
+        for (int i = 0; i < citiesCount; ++i)
+            System.out.print(cities[i] + " ");
+        System.out.println("\nWith total distance: " + this.routeLength);
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+    }
 }
