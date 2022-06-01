@@ -1,38 +1,38 @@
 package com.TSP;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+public class ProblemSolver {
 
-public class problemSolver {
+    public static Route findShortestRoute(int[][] matrix, int bound) {
+        int size = bound; //если матрица заполнена не полностью
+        int[] attendanceArray = new int[size];
+        int attendedCitiesCount = 0;
+        int i = 0, j = 0;
+        for (i = 1; i < size; ++i)
+            attendanceArray[i] = 0;
+        Route shortestRoute = new Route(size-1);
+        int minDist = 999999;
+        int minJ = 0;
 
-    public Route findShortestRoute(ArrayList<City> cities) {
-        ArrayList<City> shortestRouteCities = new ArrayList<City>(cities.size());
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Initial Route ==> " + Arrays.toString(cities.toArray()));
-        System.out.println("w/ total distance: " + new Route(cities).calculateTotalDistance());
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
-        City city = cities.get((int)(cities.size() * Math.random()));
-        updateRoutes(shortestRouteCities, cities, city);
-        while (cities.size() >= 1) {
-            city = getNextCity(cities, city);
-            updateRoutes(shortestRouteCities, cities, city);
+        shortestRoute.addCity(1, 0);
+        attendanceArray[1] = 1;
+        attendedCitiesCount++;
+
+        i = 1;
+        while (attendedCitiesCount != size - 1) {
+            for (j = 1; j < size; ++j) {
+                if (attendanceArray[j] == 0 && i != j) { //если еще не были в городе и не на диагонали
+                    if (matrix[i][j] < minDist) {
+                        minDist = matrix[i][j];
+                        minJ = j;
+                    }
+                }
+            }
+            shortestRoute.addCity(minJ, matrix[i][minJ]);
+            attendanceArray[minJ] = 1;
+            attendedCitiesCount++;
+            minDist = 999999;
+            i = minJ;
         }
-        return new Route(shortestRouteCities);
-    }
-
-    private void updateRoutes(ArrayList<City> shortestRouteCities, ArrayList<City> cities, City city) {
-        shortestRouteCities.add(city);
-        cities.remove(city);
-        System.out.println("Cities in shortest route ==> " + Arrays.toString(shortestRouteCities.toArray()));
-        System.out.println("Remaining cities ==> " + Arrays.toString(cities.toArray()) + "\n");
-    }
-
-    private City getNextCity(ArrayList<City> cities, City city) {
-        return cities.stream().min((city1, city2) -> {
-            int flag = 0;
-            if (city1.MeasureDistance(city) < city2.MeasureDistance(city)) flag = -1;
-            else if (city1.MeasureDistance(city) > city2.MeasureDistance(city)) flag = 1;
-            return flag;
-        }).get();
+        return shortestRoute;
     }
 }
