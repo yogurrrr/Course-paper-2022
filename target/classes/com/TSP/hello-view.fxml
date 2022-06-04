@@ -7,14 +7,9 @@
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #3caa3c;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TSP.Controller">
    <children>
       <AnchorPane fx:id="canvasPane" layoutX="14.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouseClicked" prefHeight="350.0" prefWidth="515.0" style="-fx-border-color: silver; -fx-background-color: ffffff; -fx-border-width: 2;" />
-      <Button fx:id="startButton" layoutX="557.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#onStartButtonClicked" prefHeight="102.0" prefWidth="99.0" text="Start">
+      <Button fx:id="startButton" layoutX="565.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#onStartButtonClicked" prefHeight="102.0" prefWidth="99.0" text="Start" textAlignment="CENTER">
          <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
-      <Button fx:id="resetButton" layoutX="557.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#onResetButtonClicked" prefHeight="160.0" prefWidth="99.0" text="Reset previous click coord-s" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="19.0" />
+            <Font size="24.0" />
          </font>
       </Button>
    </children>
