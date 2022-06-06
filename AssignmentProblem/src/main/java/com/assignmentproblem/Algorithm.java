@@ -3,7 +3,6 @@ package com.assignmentproblem;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.concurrent.atomic.AtomicReferenceArray;
 
 public class Algorithm {
     public static ArrayList<Integer> solveProblem(ArrayList<Agent> agents) {

@@ -1,7 +1,6 @@
 package com.assignmentproblem;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class DataMatrix {
     private static ArrayList<Agent> matrix;

@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="add &quot;Data&quot; and &quot;InputDataGenerator&quot; classes, bug fixes in &quot;Algorithm&quot;">
+    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="changed return value of algorithm, made the output in GUI more detailed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/DataMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/DataMatrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +45,11 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\HSE\Course paper\Course-paper-2022\AssignmentProblem\src\main\resources" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.MainApplication">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.assignmentproblem.HelloApplication" />
@@ -107,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652734179808</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="changed return value of algorithm, made the output in GUI more detailed">
+      <created>1653052387379</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1653052387379</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -125,7 +139,8 @@
     <MESSAGE value="add a selection of parameters and filling in the table by clicking the button" />
     <MESSAGE value="add &quot;Algorithm&quot; class" />
     <MESSAGE value="add &quot;Data&quot; and &quot;InputDataGenerator&quot; classes, bug fixes in &quot;Algorithm&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="add &quot;Data&quot; and &quot;InputDataGenerator&quot; classes, bug fixes in &quot;Algorithm&quot;" />
+    <MESSAGE value="changed return value of algorithm, made the output in GUI more detailed" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed return value of algorithm, made the output in GUI more detailed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -136,17 +151,17 @@
         </breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java</url>
-          <line>9</line>
+          <line>8</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java</url>
-          <line>65</line>
+          <line>64</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java</url>
-          <line>115</line>
+          <line>125</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>

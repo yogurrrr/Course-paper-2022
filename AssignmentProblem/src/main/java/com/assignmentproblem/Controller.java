@@ -1,10 +1,13 @@
 package com.assignmentproblem;
 
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.text.TextAlignment;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
@@ -30,6 +33,9 @@ public class Controller implements Initializable {
     private Label outputLabel;
 
     @FXML
+    private Button exitButton;
+
+    @FXML
     private void getAgentsAndTasksNumbers() {
         int agentsNumber = agentsSpinner.getValue();
         int tasksNumber = tasksSpinner.getValue();
@@ -49,8 +55,7 @@ public class Controller implements Initializable {
             DataMatrix.makeNewMatrix();
             DataMatrix.setVoidMatrix(agentsNumber, tasksNumber);
             fillTableView(agentsNumber, tasksNumber);
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Warning about input data");
             alert.setHeaderText(null);
@@ -79,7 +84,8 @@ public class Controller implements Initializable {
 
     private void makeColumnEditable(TableColumn<Agent, Integer> column) {
         column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        column.setOnEditCommit(value -> value.getTableView().getItems().get(value.getTablePosition().getRow()).setTaskCostByIndex(value.getTablePosition().getColumn(), value.getNewValue()));
+        column.setOnEditCommit(value -> value.getTableView().getItems().get(value.getTablePosition().getRow())
+                .setTaskCostByIndex(value.getTablePosition().getColumn(), value.getNewValue()));
     }
 
     @FXML
@@ -97,13 +103,17 @@ public class Controller implements Initializable {
 //        outputTable.setVisible(true);
 //        answerLabel.setText(Integer.toString(Algorithm.solveProblem(DataMatrix.getMatrix())));
         ArrayList<Integer> algorithmOutput = Algorithm.solveProblem(DataMatrix.getMatrix());
-        outputLabel.setText("Best matching: " + algorithmOutput.get(algorithmOutput.size() - 1) + "\n\n");
+//        outputLabel.setAlignment(Pos.TOP_CENTER);
+        outputLabel.setTextAlignment(TextAlignment.CENTER);
+        outputLabel.setText("Minimum cost of assignment: "
+                + algorithmOutput.get(algorithmOutput.size() - 1) + "\n\n");
 //        answerLabel.setText(Integer.toString(algorithmOutput.get(algorithmOutput.size() - 1)));
         algorithmOutput.remove(algorithmOutput.size() - 1);
         for (int matchedColumn = 0; matchedColumn < algorithmOutput.size() - 1; ++matchedColumn) {
             int matchedRow = algorithmOutput.get(matchedColumn);
             if (matchedRow != -1) {
-                outputLabel.setText(outputLabel.getText() + (matchedRow + 1) + " agent --> " + (matchedColumn + 1) + " task\n");
+                outputLabel.setText(outputLabel.getText() + (matchedRow + 1) + " agent → "
+                        + (matchedColumn + 1) + " task\n");
             }
         }
     }
@@ -115,14 +125,14 @@ public class Controller implements Initializable {
         DataMatrix.clear();
         DataMatrix.setVoidMatrix(agentsNumber, tasksNumber);
         // если данные из спиннеров не совпадают с реальными размерами таблицы, создаём корректную таблицу
-        if (agentsNumber != inputTable.getItems().size() || tasksNumber != inputTable.getItems().get(0).getTaskCost().size()) {
+        if (agentsNumber != inputTable.getItems().size() || tasksNumber !=
+                inputTable.getItems().get(0).getTaskCost().size()) {
             fillTableView(agentsNumber, tasksNumber);
         }
         InputDataGenerator.generate(agentsNumber, tasksNumber);
         inputTable.getItems().clear();
         inputTable.getItems().addAll(DataMatrix.getMatrix());
     }
-
 
     @FXML
     private Spinner<Integer> agentsSpinner;
@@ -133,11 +143,16 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SpinnerValueFactory<Integer> agentsSpinnerFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 2);
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 3);
         this.agentsSpinner.setValueFactory(agentsSpinnerFactory);
         SpinnerValueFactory<Integer> tasksSpinnerFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 2);
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 3);
         this.tasksSpinner.setValueFactory(tasksSpinnerFactory);
+    }
+
+    @FXML
+    private void exit() {
+        Platform.exit();
     }
 
 }
