@@ -17,6 +17,6 @@
             <Font name="Broadway" size="26.0" />
          </font>
       </Label>
-      <Button fx:id="createNodeButton" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" text="создать вершину" />
+      <Button fx:id="createNodeButton" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" text="Раскрасить граф" />
    </children>
 </AnchorPane>
