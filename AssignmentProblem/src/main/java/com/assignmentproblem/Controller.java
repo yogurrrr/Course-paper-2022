@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.TextAlignment;
 import javafx.util.converter.IntegerStringConverter;
@@ -46,15 +47,9 @@ public class Controller implements Initializable {
             tasksSpinner.setDisable(true);
             inputTable.setDisable(false);
             outputLabel.setVisible(false);
-//            answerLabel.setText("");
-//            answerLabel.setVisible(false);
-//            outputTable.getColumns().clear();
-//            outputTable.getItems().clear();
-//            bestMatchingLabel.setVisible(false);
-//            outputTable.setVisible(false);
             DataMatrix.makeNewMatrix();
             DataMatrix.setVoidMatrix(agentsNumber, tasksNumber);
-            fillTableView(agentsNumber, tasksNumber);
+            fillTableView(tasksNumber);
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Warning about input data");
@@ -65,14 +60,19 @@ public class Controller implements Initializable {
     }
 
     //@SuppressWarnings("unchecked")
-    private void fillTableView(int agentsNumber, int tasksNumber) {
+    private void fillTableView(int tasksNumber) {
         inputTable.getItems().clear();
         inputTable.getColumns().clear();
         inputTable.setEditable(true);
+        TableColumn<Agent, Character> agentIdColumn = new TableColumn<>("Agent");
+        agentIdColumn.setPrefWidth(inputTable.getPrefWidth() / (tasksNumber + 1));
+        agentIdColumn.setStyle("-fx-alignment: CENTER; -fx-font-weight: bold");
+        agentIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        inputTable.getColumns().add(agentIdColumn);
         for (int i = 0; i < tasksNumber; ++i) {
-            TableColumn<Agent, Integer> newTaskColumn = new TableColumn<>(i + 1 + " task");
+            TableColumn<Agent, Integer> newTaskColumn = new TableColumn<>("Task " + (i + 1));
             makeColumnEditable(newTaskColumn);
-            newTaskColumn.setPrefWidth(inputTable.getPrefWidth() / tasksNumber);
+            newTaskColumn.setPrefWidth(inputTable.getPrefWidth() / (tasksNumber + 1));
             newTaskColumn.setStyle("-fx-alignment: CENTER;");
             int finalI = i;
             newTaskColumn.setCellValueFactory(agentIntegerCellDataFeatures ->
@@ -96,24 +96,16 @@ public class Controller implements Initializable {
         startAlgorithmButton.setDisable(true);
         inputTable.setEditable(false);
         outputLabel.setVisible(true);
-//        outputTable.setItems(inputTable.getItems());
-//        outputTable.getColumns().addAll(inputTable.getColumns());
-//        answerLabel.setVisible(true);
-//        bestMatchingLabel.setVisible(true);
-//        outputTable.setVisible(true);
-//        answerLabel.setText(Integer.toString(Algorithm.solveProblem(DataMatrix.getMatrix())));
         ArrayList<Integer> algorithmOutput = Algorithm.solveProblem(DataMatrix.getMatrix());
-//        outputLabel.setAlignment(Pos.TOP_CENTER);
         outputLabel.setTextAlignment(TextAlignment.CENTER);
         outputLabel.setText("Minimum cost of assignment: "
                 + algorithmOutput.get(algorithmOutput.size() - 1) + "\n\n");
-//        answerLabel.setText(Integer.toString(algorithmOutput.get(algorithmOutput.size() - 1)));
         algorithmOutput.remove(algorithmOutput.size() - 1);
         for (int matchedColumn = 0; matchedColumn < algorithmOutput.size() - 1; ++matchedColumn) {
             int matchedRow = algorithmOutput.get(matchedColumn);
             if (matchedRow != -1) {
-                outputLabel.setText(outputLabel.getText() + (matchedRow + 1) + " agent → "
-                        + (matchedColumn + 1) + " task\n");
+                outputLabel.setText(outputLabel.getText() + "Agent " + (char)((int)'A' + matchedRow) + " → "
+                        + "Task " + (matchedColumn + 1) + '\n');
             }
         }
     }
@@ -124,11 +116,6 @@ public class Controller implements Initializable {
         int tasksNumber = tasksSpinner.getValue();
         DataMatrix.clear();
         DataMatrix.setVoidMatrix(agentsNumber, tasksNumber);
-        // если данные из спиннеров не совпадают с реальными размерами таблицы, создаём корректную таблицу
-        if (agentsNumber != inputTable.getItems().size() || tasksNumber !=
-                inputTable.getItems().get(0).getTaskCost().size()) {
-            fillTableView(agentsNumber, tasksNumber);
-        }
         InputDataGenerator.generate(agentsNumber, tasksNumber);
         inputTable.getItems().clear();
         inputTable.getItems().addAll(DataMatrix.getMatrix());

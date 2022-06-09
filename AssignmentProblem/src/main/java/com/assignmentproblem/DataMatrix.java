@@ -15,7 +15,7 @@ public class DataMatrix {
 
     public static void setVoidMatrix(int agentsNumber, int tasksNumber) {
         for (int i = 0; i < agentsNumber; ++i) {
-            matrix.add(new Agent(tasksNumber));
+            matrix.add(new Agent((char)((int)('A') + i), tasksNumber));
         }
     }
 

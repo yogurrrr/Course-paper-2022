@@ -6,14 +6,25 @@ import java.util.Collections;
 
 public class Agent {
 
+    private Character id;
+
+    public Character getId() {
+        return id;
+    }
+
+    public void setId(Character id) {
+        this.id = id;
+    }
+
     private ArrayList<Integer> taskCost;
 
     public Agent(ArrayList<Integer> tasks) {
         this.taskCost = tasks;
     }
 
-    public Agent(int tasksNumber) {
+    public Agent(Character id, int tasksNumber) {
         this.taskCost = new ArrayList<>(Collections.nCopies(tasksNumber, 0));
+        this.id = id;
     }
 
     public ArrayList<Integer> getTaskCost() {

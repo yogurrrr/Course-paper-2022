@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="changed return value of algorithm, made the output in GUI more detailed">
+    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="change the appearance">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Agent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/DataMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/DataMatrix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/assignmentproblem/view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653052387379</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="change the appearance">
+      <created>1654548297692</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1654548297692</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -140,7 +145,8 @@
     <MESSAGE value="add &quot;Algorithm&quot; class" />
     <MESSAGE value="add &quot;Data&quot; and &quot;InputDataGenerator&quot; classes, bug fixes in &quot;Algorithm&quot;" />
     <MESSAGE value="changed return value of algorithm, made the output in GUI more detailed" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed return value of algorithm, made the output in GUI more detailed" />
+    <MESSAGE value="change the appearance" />
+    <option name="LAST_COMMIT_MESSAGE" value="change the appearance" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -161,7 +167,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java</url>
-          <line>125</line>
+          <line>117</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
