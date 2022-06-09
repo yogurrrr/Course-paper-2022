@@ -7,7 +7,7 @@ public class CitiesCollection {
 
     public static void createCitiesCollection()
     {
-        size = 6;
+        size = 4;
         matrix = new int[size][size];
     }
 
