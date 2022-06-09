@@ -46,6 +46,8 @@ public class Controller {
     Circle[] circles = new Circle[100];
     int circlesCount = 0;
 
+
+
     @FXML
     void OnMouseClicked(MouseEvent event) {
 
@@ -112,6 +114,8 @@ public class Controller {
 //                    nodes[nodeIt] = t;
 //                    nodeIt++;
 //                }
+
+
                 Node[] nodes = new Node[myGraph.nodesId];
                 for (int i = 0; i < myGraph.nodesId; ++i){
                     nodes[i] = myGraph.myNodes.get(i);
@@ -123,15 +127,18 @@ public class Controller {
 
 
                 //расскраска графа
+                boolean newColor = false;
                 int color = 0;
                 for (int i = 0; i < nodes.length; ++i){
-                    color++;
+                    if (newColor == true){ color++;}
+                    newColor = false;
                     if (nodes[i].color != -1){continue;} //если вершина уже расскрашена
                     boolean[] connStr = Arrays.copyOfRange(nodes[i].neighbours, 0, numberofconnections);//nodes[i].neighbours;
                     for(int j =i+1; j < numberofconnections; ++j){
                         if (connStr[j] == false){ //если соседями не являются
                             if (nodes[j].color == -1){ // если не расскрашены
                                 for(int q = 0; q < numberofconnections; ++q){ // складывание строк
+                                    newColor = true;
                                     if (nodes[i].neighbours[q] == true || nodes[j].neighbours[q] == true){
                                         connStr[q] = true;
                                     }
@@ -141,12 +148,14 @@ public class Controller {
                             }
                         }
                     }
-                    if (nodes[i].color == -1){nodes[i].color = color;} //если так и не расскрасили ноду, то даем ей новый цвет
+                    if (nodes[i].color == -1){//если так и не расскрасили ноду, то даем ей новый цвет
+                        newColor = true;
+                        nodes[i].color = color;
+                    }
                 }
 
                 int[] tmp = new int[100];
-                String str = new String();
-
+                //String str = new String();
 
                 for (int i =0; i < nodes.length; ++i){
                     tmp[i] = nodes[i].color;
@@ -163,7 +172,7 @@ public class Controller {
                         circles[i].setFill(Color.BLUE);
                     }
                     else if (nodes[i].color == 4){
-                        circles[i].setFill(Color.BLACK);
+                        circles[i].setFill(Color.YELLOW);
                     }
                     else if (nodes[i].color == 5){
                         circles[i].setFill(Color.ORANGE);
@@ -171,12 +180,13 @@ public class Controller {
                     else if (nodes[i].color == 6){
                         circles[i].setFill(Color.PURPLE);
                     }
+                    else {
+                        circles[i].setFill(Color.BROWN);
+                    }
 
                     System.out.println(nodes[i].color);
                 }
-//                output.add
-//                output.setText(String.valueOf(tmp));
-                //System.out.println(textfield.getParagraphs());
+
             }
         });
         assert createNodeButton != null : "fx:id=\"createNodeButton\" was not injected: check your FXML file 'sample.fxml'.";
