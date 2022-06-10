@@ -3,7 +3,6 @@ package com.TSP;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class Application extends javafx.application.Application {
@@ -17,7 +16,6 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
-        CitiesCollection.createCitiesCollection();
         launch();
     }
 }
