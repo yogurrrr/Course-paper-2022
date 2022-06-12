@@ -4,22 +4,22 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.TextAlignment;
-import javafx.util.converter.IntegerStringConverter;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.util.*;
 
 public class Controller implements Initializable {
-    @FXML
-    private Button confirmButton;
 
     @FXML
-    private Label bestMatchingLabel;
+    private Button exitButton;
+
+    @FXML
+    private Button confirmButton;
 
     @FXML
     private Button generateButton;
@@ -34,7 +34,10 @@ public class Controller implements Initializable {
     private Label outputLabel;
 
     @FXML
-    private Button exitButton;
+    private Spinner<Integer> agentsSpinner;
+
+    @FXML
+    private Spinner<Integer> tasksSpinner;
 
     @FXML
     private void getAgentsAndTasksNumbers() {
@@ -59,7 +62,6 @@ public class Controller implements Initializable {
         }
     }
 
-    //@SuppressWarnings("unchecked")
     private void fillTableView(int tasksNumber) {
         inputTable.getItems().clear();
         inputTable.getColumns().clear();
@@ -76,16 +78,33 @@ public class Controller implements Initializable {
             newTaskColumn.setStyle("-fx-alignment: CENTER;");
             int finalI = i;
             newTaskColumn.setCellValueFactory(agentIntegerCellDataFeatures ->
-                    new ReadOnlyObjectWrapper(agentIntegerCellDataFeatures.getValue().getTaskCost().get(finalI)));
+                    new ReadOnlyObjectWrapper<>(agentIntegerCellDataFeatures.getValue().getTaskCost().get(finalI)));
             inputTable.getColumns().add(newTaskColumn);
         }
         inputTable.getItems().addAll(DataMatrix.getMatrix());
     }
 
     private void makeColumnEditable(TableColumn<Agent, Integer> column) {
-        column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        column.setCellFactory(TextFieldTableCell.forTableColumn(new StringConverter<>() {
+            public Integer fromString(String s) {
+                try {
+                    return Integer.valueOf(s);
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Input data type must be Integer, zero returned.");
+                    alert.showAndWait();
+                    return 0;
+                }
+            }
+
+            public String toString(Integer i) {
+                return Integer.toString(i);
+            }
+        }));
         column.setOnEditCommit(value -> value.getTableView().getItems().get(value.getTablePosition().getRow())
-                .setTaskCostByIndex(value.getTablePosition().getColumn(), value.getNewValue()));
+                .setTaskCostByIndex(value.getTablePosition().getColumn() - 1, value.getNewValue()));
     }
 
     @FXML
@@ -104,7 +123,7 @@ public class Controller implements Initializable {
         for (int matchedColumn = 0; matchedColumn < algorithmOutput.size() - 1; ++matchedColumn) {
             int matchedRow = algorithmOutput.get(matchedColumn);
             if (matchedRow != -1) {
-                outputLabel.setText(outputLabel.getText() + "Agent " + (char)((int)'A' + matchedRow) + " → "
+                outputLabel.setText(outputLabel.getText() + "Agent " + (char) ((int) 'A' + matchedRow) + " → "
                         + "Task " + (matchedColumn + 1) + '\n');
             }
         }
@@ -120,12 +139,6 @@ public class Controller implements Initializable {
         inputTable.getItems().clear();
         inputTable.getItems().addAll(DataMatrix.getMatrix());
     }
-
-    @FXML
-    private Spinner<Integer> agentsSpinner;
-
-    @FXML
-    private Spinner<Integer> tasksSpinner;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

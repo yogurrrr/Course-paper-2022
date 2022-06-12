@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="change the appearance">
+    <list default="true" id="c4ac082b-ccd3-46ec-92f1-4e5abe4bc1c5" name="Changes" comment="delete comments, make small changes in output">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/DataMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/assignmentproblem/DataMatrix.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +23,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -38,9 +44,11 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/HSE/Course paper/Course-paper-2022/AssignmentProblem&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -126,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654548297692</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="delete comments, make small changes in output">
+      <created>1654756947893</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1654756947893</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,7 +161,8 @@
     <MESSAGE value="add &quot;Data&quot; and &quot;InputDataGenerator&quot; classes, bug fixes in &quot;Algorithm&quot;" />
     <MESSAGE value="changed return value of algorithm, made the output in GUI more detailed" />
     <MESSAGE value="change the appearance" />
-    <option name="LAST_COMMIT_MESSAGE" value="change the appearance" />
+    <MESSAGE value="delete comments, make small changes in output" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete comments, make small changes in output" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -157,18 +173,18 @@
         </breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java</url>
-          <line>8</line>
+          <line>7</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java</url>
-          <line>64</line>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Controller.java</url>
-          <line>117</line>
+          <line>136</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/assignmentproblem/Algorithm.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

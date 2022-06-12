@@ -1,6 +1,5 @@
 package com.assignmentproblem;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -16,11 +15,7 @@ public class Agent {
         this.id = id;
     }
 
-    private ArrayList<Integer> taskCost;
-
-    public Agent(ArrayList<Integer> tasks) {
-        this.taskCost = tasks;
-    }
+    private final ArrayList<Integer> taskCost;
 
     public Agent(Character id, int tasksNumber) {
         this.taskCost = new ArrayList<>(Collections.nCopies(tasksNumber, 0));
@@ -29,10 +24,6 @@ public class Agent {
 
     public ArrayList<Integer> getTaskCost() {
         return taskCost;
-    }
-
-    public void setTaskCost(ArrayList<Integer> taskCost) {
-        this.taskCost = taskCost;
     }
 
     public void setTaskCostByIndex(int index, Integer newValue) {
