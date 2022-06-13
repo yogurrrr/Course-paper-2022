@@ -2,7 +2,9 @@ package com.TSP;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class Application extends javafx.application.Application {
@@ -10,12 +12,15 @@ public class Application extends javafx.application.Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 400);
-        stage.setTitle("Wassup!");
+        stage.getIcons().add(new Image("C:\\Users\\Andrew.LAPTOP-2E43C1F5\\IdeaProjects\\TSP\\src\\main\\resources\\icon.png"));
+        stage.setResizable(false);
+        stage.setTitle("TSP");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
+        CitiesCollection.createCitiesCollection(8);
         launch();
     }
 }

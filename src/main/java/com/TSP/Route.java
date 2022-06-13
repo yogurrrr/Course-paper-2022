@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Route {
 
-    ArrayList<Integer> cities;
+    public ArrayList<Integer> cities;
     public int citiesCount;
     public int routeLength;
 
-    Route(int initialCapacity) {
+    Route() {
         cities = new ArrayList<>();
         citiesCount = 0;
         routeLength = 0;
