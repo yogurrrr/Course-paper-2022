@@ -2,9 +2,21 @@ package com.TSP;
 
 public class CitiesCollection {
 
-    public static int size;
-    public static int[][] matrix;
-    public static int roadsCount;
+    private static int size;
+    private static int[][] matrix;
+    private static int roadsCount;
+
+    public static int getSize() {
+        return size;
+    }
+
+    public static int[][] getMatrix() {
+        return matrix;
+    }
+
+    public static int getRoadsCount() {
+        return roadsCount;
+    }
 
     public static void createCitiesCollection(int maxCitiesCount)
     {
@@ -28,11 +40,11 @@ public class CitiesCollection {
         roadsCount = 0;
     }
 
-    public static void output()
+    public static void output(int bound)
     {
         System.out.println("Adjacency matrix:");
-        for (int i = 1; i < size; ++i) {
-            for (int j = 1; j < size; ++j)
+        for (int i = 1; i < bound; ++i) {
+            for (int j = 1; j < bound; ++j)
                 System.out.print(matrix[i][j] + " ");
             System.out.println();
         }

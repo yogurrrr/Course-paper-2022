@@ -1,8 +1,6 @@
 package com.TSP;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -16,18 +14,6 @@ import javafx.scene.shape.Line;
 public class Controller {
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private AnchorPane mainPane;
-
-    @FXML
-    private Button resetButton;
-
-    @FXML
     private AnchorPane canvasPane = new AnchorPane();
 
     private Point2D canvasPanePointCoords;
@@ -35,7 +21,10 @@ public class Controller {
     @FXML
     private Button startButton;
 
-    private ArrayList<Point2D> pointsArray;
+    @FXML
+    private Button generateButton;
+
+    private static ArrayList<Point2D> pointsArray;
 
     private int newCitiesCount = 1; //в дальнейшем буду передавать его как bound для ProblemSolver
 
@@ -68,17 +57,14 @@ public class Controller {
             canvasPanePointCoords = canvasPane.sceneToLocal(pointX, pointY);
             int counter = 0; int counter2 = 0;
             int flag = 0;
-            if (pointsArray.size() == 0)
-                flag = 1;
+            if (pointsArray.size() == 0) { flag = 1; }
             else {
                 for (int i = 0; i < pointsArray.size(); ++i) {
-                    if (pointsArray.get(i).distance(canvasPanePointCoords) > 32)
-                        ++counter;
+                    if (pointsArray.get(i).distance(canvasPanePointCoords) > 32) { ++counter; }
                 }
-                if (counter == pointsArray.size())
-                    flag = 1;
+                if (counter == pointsArray.size()) { flag = 1; }
             }
-            if (flag == 1 && newCitiesCount < CitiesCollection.size) { //если в месте клика нет точки
+            if (flag == 1 && newCitiesCount < CitiesCollection.getSize()) { //если в месте клика нет точки
                 addPoint();
                 disableButtons();
             } else if (flag == 0) { //если в месте клика уже есть точка
@@ -91,7 +77,7 @@ public class Controller {
                         }
                         repPointClicksCounter = 0;
                     }
-                    if (counter2 == 2 && prevPointClicked.distance(canvasPanePointCoords) > 32 && CitiesCollection.matrix[getCity(prevPointClicked)][getCity(canvasPanePointCoords)] == 0) { //если пред. клик и текущий клик - города
+                    if (counter2 == 2 && prevPointClicked.distance(canvasPanePointCoords) > 32 && CitiesCollection.getMatrix()[getCity(prevPointClicked)][getCity(canvasPanePointCoords)] == 0) { //если пред. клик и текущий клик - города
                         enableButtons();
                     } else {
                         prevPointClicked = canvasPanePointCoords;
@@ -101,9 +87,9 @@ public class Controller {
             } else disableButtons();
     }
 
-    private Line[] lineArray = new Line[(CitiesCollection.size*(CitiesCollection.size-1)/2)+1];
-    private Circle[] circleArray = new Circle[CitiesCollection.size];
-    private Label[]  labelArray = new Label[CitiesCollection.size];
+    private Line[] lineArray = new Line[(CitiesCollection.getSize()*(CitiesCollection.getSize()-1)/2)+1]; //максимальное количество ребер в полном графе
+    private Circle[] circleArray = new Circle[CitiesCollection.getSize()];
+    private Label[]  labelArray = new Label[CitiesCollection.getSize()];
 
     @FXML
     void initialize() {
@@ -114,16 +100,18 @@ public class Controller {
         repPointClicksCounter = 0;
         disableButtons();
         startButton.setDisable(true);
+        generateButton.setDisable(true);
+        localRoadsCount = 0;
     }
 
     @FXML
     void onStartButtonClicked(MouseEvent event) {
-        CitiesCollection.output();
+        CitiesCollection.output(newCitiesCount);
         try {
-            ProblemSolver.findShortestRoute(CitiesCollection.matrix, newCitiesCount).printRoute();
+            ProblemSolver.findShortestRoute(CitiesCollection.getMatrix(), newCitiesCount).printRoute();
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Wrong input!");
+            System.out.println("Wrong input! First city must have neighbours and the adjacency matrix should not contain unconnected clusters of cities.");
         }
     }
 
@@ -141,9 +129,33 @@ public class Controller {
         initialize();
     }
 
+    private int localRoadsCount;
+
+    @FXML
+    void onGenerateButtonClicked(MouseEvent event) {
+        Generator generator = new Generator(newCitiesCount);
+        generator.generateRoads();
+        generateButton.setDisable(true);
+        startButton.setDisable(false);
+        disableButtons();
+        for (int i = 1; i < newCitiesCount; ++i) {
+            for (int j = 1; j < i; ++j) {
+                //по номерам i-1 и j-1 получать координаты начала и конца линии из pointsArray
+                Line line = new Line();
+                lineArray[localRoadsCount++] = line;
+                line.setStartX(pointsArray.get(i-1).getX());
+                line.setStartY(pointsArray.get(i-1).getY());
+                line.setEndX(pointsArray.get(j-1).getX());
+                line.setEndY(pointsArray.get(j-1).getY());
+                canvasPane.getChildren().add(line);
+            }
+        }
+    }
+
     private void addPoint() {
         pointsArray.add(canvasPanePointCoords);
         Circle point = new Circle(canvasPanePointCoords.getX(), canvasPanePointCoords.getY(), 8, Color.CADETBLUE);
+        if (newCitiesCount == 1) { point.setFill(Color.RED); }
         Label label = new Label(Integer.toString(newCitiesCount));
         label.setLayoutX(canvasPanePointCoords.getX()+5);
         label.setLayoutY(canvasPanePointCoords.getY()+5);
@@ -152,19 +164,21 @@ public class Controller {
         circleArray[newCitiesCount] = point;
         labelArray[newCitiesCount] = label;
         newCitiesCount++;
+        if (newCitiesCount > 2 && CitiesCollection.getRoadsCount() == 0) { generateButton.setDisable(false); }
     }
 
     private void addLine() {
-        if (CitiesCollection.roadsCount > 0) { startButton.setDisable(false); }
+        if (CitiesCollection.getRoadsCount() > 0) { startButton.setDisable(false); }
         getCityCoords(prevPointClicked);
         getCityCoords(canvasPanePointCoords);
         Line line = new Line();
-        lineArray[CitiesCollection.roadsCount] = line;
+        lineArray[CitiesCollection.getRoadsCount()] = line;
         line.setStartX(getCityCoords(prevPointClicked).getX());
         line.setStartY(getCityCoords(prevPointClicked).getY());
         line.setEndX(getCityCoords(canvasPanePointCoords).getX());
         line.setEndY(getCityCoords(canvasPanePointCoords).getY());
         canvasPane.getChildren().add(line);
+        generateButton.setDisable(true);
     }
 
     private void disableButtons() {
@@ -280,5 +294,4 @@ public class Controller {
 
     @FXML
     private Button button9;
-
 }

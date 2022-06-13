@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Route {
 
-    public ArrayList<Integer> cities;
-    public int citiesCount;
-    public int routeLength;
+    private ArrayList<Integer> cities;
+    private int citiesCount;
+    private int routeLength;
 
     Route() {
         cities = new ArrayList<>();

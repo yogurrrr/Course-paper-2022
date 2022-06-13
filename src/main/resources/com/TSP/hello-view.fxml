@@ -6,8 +6,8 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="706.0" style="-fx-background-color: #3caa3c;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TSP.Controller">
    <children>
-      <AnchorPane fx:id="canvasPane" layoutX="14.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouseClicked" prefHeight="365.0" prefWidth="466.0" style="-fx-border-color: silver; -fx-background-color: ffffff; -fx-border-width: 2;" />
-      <Button fx:id="startButton" layoutX="492.0" layoutY="273.0" mnemonicParsing="false" onMouseClicked="#onStartButtonClicked" prefHeight="98.0" prefWidth="201.0" text="Start" textAlignment="CENTER">
+      <AnchorPane fx:id="canvasPane" layoutX="14.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouseClicked" prefHeight="380.0" prefWidth="465.0" style="-fx-border-color: silver; -fx-background-color: ffffff; -fx-border-width: 2;" />
+      <Button fx:id="startButton" layoutX="492.0" layoutY="324.0" mnemonicParsing="false" onMouseClicked="#onStartButtonClicked" prefHeight="62.0" prefWidth="201.0" text="Start" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
@@ -60,6 +60,11 @@
       <Button fx:id="resetButton" layoutX="492.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onResetButtonClicked" prefHeight="31.0" prefWidth="201.0" text="Reset">
          <font>
             <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="generateButton" layoutX="492.0" layoutY="268.0" mnemonicParsing="false" onMouseClicked="#onGenerateButtonClicked" prefHeight="48.0" prefWidth="201.0" text="Generate">
+         <font>
+            <Font size="21.0" />
          </font>
       </Button>
    </children>
