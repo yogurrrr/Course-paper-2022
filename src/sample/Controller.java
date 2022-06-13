@@ -3,21 +3,15 @@ package sample;
 
 import javafx.geometry.Point2D;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.input.MouseEvent;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -39,8 +33,6 @@ public class Controller {
     @FXML
     private TextArea textfield;
 
-    //@FXML
-    //private Label output;
 
     Graph myGraph = new Graph();
     Circle[] circles = new Circle[100];
@@ -90,31 +82,12 @@ public class Controller {
     }
 
 
-
-
-
     @FXML
     void initialize() {
 
         createNodeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
-//                ObservableList<CharSequence> mas = textfield.getParagraphs();  //получаю ввод пользователя
-//                Node[] nodes = new Node[mas.size()];
-//                int nodeIt = 0;
-//                final int numberofconnections = mas.get(0).length();
-//                for(int i = 0; i < mas.size(); ++i){ //обхожу каждую строчку
-//                    boolean[] connections = new boolean[numberofconnections];
-//                    for (int j = 0; j <numberofconnections; ++j){
-//                        if (mas.get(i).charAt(j) == '1'){connections[j] = true;}
-//                        else {connections[j] = false;}
-//                    }
-//                    Node t = new Node(connections);
-//                    nodes[nodeIt] = t;
-//                    nodeIt++;
-//                }
-
 
                 Node[] nodes = new Node[myGraph.nodesId];
                 for (int i = 0; i < myGraph.nodesId; ++i){
@@ -123,7 +96,6 @@ public class Controller {
                     nodes[i].color = -1;
                 }
                 int numberofconnections = myGraph.nodesId;
-
 
 
                 //расскраска графа
@@ -189,7 +161,7 @@ public class Controller {
 
             }
         });
-        assert createNodeButton != null : "fx:id=\"createNodeButton\" was not injected: check your FXML file 'sample.fxml'.";
+        //assert createNodeButton != null : "fx:id=\"createNodeButton\" was not injected: check your FXML file 'sample.fxml'.";
 
     }
 
