@@ -4,12 +4,67 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #3caa3c;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TSP.Controller">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="706.0" style="-fx-background-color: #3caa3c;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TSP.Controller">
    <children>
-      <AnchorPane fx:id="canvasPane" layoutX="14.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouseClicked" prefHeight="350.0" prefWidth="515.0" style="-fx-border-color: silver; -fx-background-color: ffffff; -fx-border-width: 2;" />
-      <Button fx:id="startButton" layoutX="565.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#onStartButtonClicked" prefHeight="102.0" prefWidth="99.0" text="Start" textAlignment="CENTER">
+      <AnchorPane fx:id="canvasPane" layoutX="14.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouseClicked" prefHeight="380.0" prefWidth="465.0" style="-fx-border-color: silver; -fx-background-color: ffffff; -fx-border-width: 2;" />
+      <Button fx:id="startButton" layoutX="492.0" layoutY="324.0" mnemonicParsing="false" onMouseClicked="#onStartButtonClicked" prefHeight="62.0" prefWidth="201.0" text="Start" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="button5" layoutX="563.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#onButton5Clicked" prefHeight="62.0" prefWidth="58.0" text="5">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="button8" layoutX="563.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#onButton8Clicked" prefHeight="62.0" prefWidth="58.0" text="8">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="button6" layoutX="634.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#onButton6Clicked" prefHeight="62.0" prefWidth="58.0" text="6">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="button4" layoutX="492.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#onButton4Clicked" prefHeight="62.0" prefWidth="58.0" text="4">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="button9" layoutX="634.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#onButton9Clicked" prefHeight="62.0" prefWidth="58.0" text="9">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="button7" layoutX="492.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#onButton7Clicked" prefHeight="62.0" prefWidth="58.0" text="7">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="button1" layoutX="492.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#onButton1Clicked" prefHeight="62.0" prefWidth="58.0" text="1">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="button2" layoutX="563.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#onButton2Clicked" prefHeight="62.0" prefWidth="58.0" text="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="button3" layoutX="634.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#onButton3Clicked" prefHeight="62.0" prefWidth="58.0" text="3">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="resetButton" layoutX="492.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onResetButtonClicked" prefHeight="31.0" prefWidth="201.0" text="Reset">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="generateButton" layoutX="492.0" layoutY="268.0" mnemonicParsing="false" onMouseClicked="#onGenerateButtonClicked" prefHeight="48.0" prefWidth="201.0" text="Generate">
+         <font>
+            <Font size="21.0" />
          </font>
       </Button>
    </children>

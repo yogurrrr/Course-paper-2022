@@ -1,19 +1,21 @@
 package com.TSP;
 
+import java.util.ArrayList;
+
 public class Route {
 
-    public int[] cities;
-    public int citiesCount;
-    public int routeLength;
+    private ArrayList<Integer> cities;
+    private int citiesCount;
+    private int routeLength;
 
-    Route(int maxCitiesCount) {
-        cities = new int[maxCitiesCount];
+    Route() {
+        cities = new ArrayList<>();
         citiesCount = 0;
         routeLength = 0;
     }
 
     public void addCity(int city, int distToPrevCity) {
-        cities[citiesCount++] = city;
+        cities.add(citiesCount++, city);
         routeLength += distToPrevCity;
     }
 
@@ -21,7 +23,7 @@ public class Route {
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
         System.out.print("Route: ");
         for (int i = 0; i < citiesCount; ++i)
-            System.out.print(cities[i] + " ");
+            System.out.print(cities.get(i) + " ");
         System.out.println("\nWith total distance: " + this.routeLength);
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
     }
