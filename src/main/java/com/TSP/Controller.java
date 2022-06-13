@@ -10,6 +10,7 @@ import javafx.scene.shape.Circle;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Line;
+import javafx.scene.control.Alert;
 
 public class Controller {
 
@@ -107,12 +108,19 @@ public class Controller {
     @FXML
     void onStartButtonClicked(MouseEvent event) {
         CitiesCollection.output(newCitiesCount);
+        Route resRoute = new Route(); int flag = 0;
         try {
-            ProblemSolver.findShortestRoute(CitiesCollection.getMatrix(), newCitiesCount).printRoute();
+           resRoute = ProblemSolver.findShortestRoute(CitiesCollection.getMatrix(), newCitiesCount);
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Wrong input! First city must have neighbours and the adjacency matrix should not contain unconnected clusters of cities.");
+            System.out.println("A route was not found :(");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText("Make sure that the first city has neighbours and the matrix does not contain unconnected clusters of cities!");
+            alert.showAndWait();
+            flag = 1;
         }
+        if (flag == 0) { resRoute.printRoute(); }
     }
 
     @FXML

@@ -41,7 +41,7 @@ public class ProblemSolver {
             } else {
                 shortestRoute.addCity(prevRow, matrix[i][prevRow]);
                 i = prevRow;
-                --prevRow; //проблема во вложенном возвращении
+                --prevRow;
             }
             minDist = 999999;
             minJ = 0;
