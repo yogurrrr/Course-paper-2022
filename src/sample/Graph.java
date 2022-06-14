@@ -4,9 +4,9 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 
 public class Graph {
-    public int nodesId;
-    public int clickedNode;
-    public ArrayList<Node> myNodes;
+    private int nodesId;
+    protected int clickedNode;
+    protected ArrayList<Node> myNodes;
 
     Graph(){
         myNodes = new ArrayList<Node>(100);
@@ -14,12 +14,12 @@ public class Graph {
         clickedNode = -1;
     }
     int checkIfPointExists(Point2D point){
-        if (myNodes.size() == 0){
+        if (myNodes.size() == 0 || myNodes.size() == 100){
             return -1;
         }
         for (int i = 0; i < myNodes.size(); ++i){
-            double localX = myNodes.get(i).coords.getX();
-            double localY = myNodes.get(i).coords.getY();
+            double localX = myNodes.get(i).getCoords().getX();
+            double localY = myNodes.get(i).getCoords().getY();
             localX-= point.getX();
             localY-= point.getY();
             if (Math.abs(localX) < 10 && Math.abs(localY) < 10){
@@ -31,7 +31,7 @@ public class Graph {
         }
         return -1;
     }
-
-
+    int getNodesId(){return nodesId;}
+    void incrementNodesId(){nodesId++;}
 
 }

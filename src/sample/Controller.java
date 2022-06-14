@@ -51,14 +51,14 @@ public class Controller {
         if(curnode != -1){
             if (myGraph.clickedNode != curnode){
 
-                System.out.println("line between node " + myGraph.myNodes.get(myGraph.clickedNode).number + " and " +  myGraph.myNodes.get(curnode).number);
+                System.out.println("line between node " + myGraph.myNodes.get(myGraph.clickedNode).getNumber() + " and " +  myGraph.myNodes.get(curnode).getNumber());
                 Line line = new Line();
                 myGraph.myNodes.get(myGraph.clickedNode).neighbours[curnode] = true;
                 myGraph.myNodes.get(curnode).neighbours[myGraph.clickedNode] = true;
-                line.setStartX(myGraph.myNodes.get(myGraph.clickedNode).coords.getX());
-                line.setStartY(myGraph.myNodes.get(myGraph.clickedNode).coords.getY());
-                line.setEndX(myGraph.myNodes.get(curnode).coords.getX());
-                line.setEndY(myGraph.myNodes.get(curnode).coords.getY());
+                line.setStartX(myGraph.myNodes.get(myGraph.clickedNode).getCoords().getX());
+                line.setStartY(myGraph.myNodes.get(myGraph.clickedNode).getCoords().getY());
+                line.setEndX(myGraph.myNodes.get(curnode).getCoords().getX());
+                line.setEndY(myGraph.myNodes.get(curnode).getCoords().getY());
                 GraphPane.getChildren().add(line);
                 myGraph.clickedNode = -1;
             }
@@ -70,13 +70,16 @@ public class Controller {
             myGraph.clickedNode = -1;
             Point2D point = GraphPane.sceneToLocal(pointX, pointY);
             Circle circle = new Circle(point.getX(), point.getY(), 10, Color.BLACK);
-            circles[circlesCount] = circle;
-            circlesCount++;
-            GraphPane.getChildren().add(circle);
-            Node newNode = new Node(point, myGraph.nodesId);
-            myGraph.nodesId++;
-            myGraph.myNodes.add(newNode);
-            System.out.println("node created, id - " + newNode.number);
+
+            if (myGraph.myNodes.size() < 100) {
+                circles[circlesCount] = circle;
+                circlesCount++;
+                GraphPane.getChildren().add(circle);
+                Node newNode = new Node(point, myGraph.getNodesId());
+                myGraph.incrementNodesId();
+                myGraph.myNodes.add(newNode);
+                System.out.println("node created, id - " + newNode.getNumber());
+            }
 
         }
     }
@@ -89,40 +92,40 @@ public class Controller {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-                Node[] nodes = new Node[myGraph.nodesId];
-                for (int i = 0; i < myGraph.nodesId; ++i){
+                Node[] nodes = new Node[myGraph.getNodesId()];
+                for (int i = 0; i < myGraph.getNodesId(); ++i){
                     nodes[i] = myGraph.myNodes.get(i);
                     //ниже строчка нужна для очищения всех цветов если пользователь захочет дорисовать граф
-                    nodes[i].color = -1;
+                    nodes[i].setColour(-1);
                 }
-                int numberofconnections = myGraph.nodesId;
+                int numberofconnections = myGraph.getNodesId();
 
 
                 //расскраска графа
-                boolean newColor = false;
+                boolean newColour = false;
                 int color = 0;
                 for (int i = 0; i < nodes.length; ++i){
-                    if (newColor == true){ color++;}
-                    newColor = false;
-                    if (nodes[i].color != -1){continue;} //если вершина уже расскрашена
+                    if (newColour == true){ color++;}
+                    newColour = false;
+                    if (nodes[i].getColour() != -1){continue;} //если вершина уже расскрашена
                     boolean[] connStr = Arrays.copyOfRange(nodes[i].neighbours, 0, numberofconnections);//nodes[i].neighbours;
                     for(int j =i+1; j < numberofconnections; ++j){
                         if (connStr[j] == false){ //если соседями не являются
-                            if (nodes[j].color == -1){ // если не расскрашены
+                            if (nodes[j].getColour() == -1){ // если не расскрашены
                                 for(int q = 0; q < numberofconnections; ++q){ // складывание строк
-                                    newColor = true;
+                                    newColour = true;
                                     if (nodes[i].neighbours[q] == true || nodes[j].neighbours[q] == true){
                                         connStr[q] = true;
                                     }
                                 }
-                                nodes[i].color = color;
-                                nodes[j].color = color;
+                                nodes[i].setColour(color);
+                                nodes[j].setColour(color);
                             }
                         }
                     }
-                    if (nodes[i].color == -1){//если так и не расскрасили ноду, то даем ей новый цвет
-                        newColor = true;
-                        nodes[i].color = color;
+                    if (nodes[i].getColour() == -1){//если так и не расскрасили ноду, то даем ей новый цвет
+                        newColour = true;
+                        nodes[i].setColour(color);
                     }
                 }
 
@@ -130,33 +133,33 @@ public class Controller {
                 //String str = new String();
 
                 for (int i =0; i < nodes.length; ++i){
-                    tmp[i] = nodes[i].color;
-                    if (nodes[i].color == 0){
+                    tmp[i] = nodes[i].getColour();
+                    if (nodes[i].getColour() == 0){
                         circles[i].setFill(Color.BLACK);
                     }
-                    else if( nodes[i].color == 1){
+                    else if( nodes[i].getColour() == 1){
                         circles[i].setFill(Color.RED);
                     }
-                    else  if (nodes[i].color == 2){
+                    else  if (nodes[i].getColour() == 2){
                         circles[i].setFill(Color.GREEN);
                     }
-                    else  if (nodes[i].color == 3){
+                    else  if (nodes[i].getColour() == 3){
                         circles[i].setFill(Color.BLUE);
                     }
-                    else if (nodes[i].color == 4){
+                    else if (nodes[i].getColour() == 4){
                         circles[i].setFill(Color.YELLOW);
                     }
-                    else if (nodes[i].color == 5){
+                    else if (nodes[i].getColour() == 5){
                         circles[i].setFill(Color.ORANGE);
                     }
-                    else if (nodes[i].color == 6){
+                    else if (nodes[i].getColour() == 6){
                         circles[i].setFill(Color.PURPLE);
                     }
                     else {
                         circles[i].setFill(Color.BROWN);
                     }
 
-                    System.out.println(nodes[i].color);
+                    System.out.println(nodes[i].getColour());
                 }
 
             }
